@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   submitForm.addEventListener("submit", function (e) {
     e.preventDefault();
     addBookList();
+    submitForm.reset();  
   });
 
   if (isStorageExist()) {
@@ -57,8 +58,8 @@ function isStorageExist() {
 }
 
 function addBookList() {
-  const title = document.getElementById("title").value;
-  const author = document.getElementById("author").value;
+  let title = document.getElementById("title").value;
+  let author = document.getElementById("author").value;
   const year = Number(document.getElementById("year").value);
   if (typeof year === "number" && !isNaN(year)) {
     console.log("Nilai year adalah number:", year);
@@ -66,6 +67,9 @@ function addBookList() {
     console.log("Nilai year bukan number:", year);
   }
   const isComplete = document.getElementById("input-complete").checked;
+  
+  title = capitalizeWords(title);
+  author = capitalizeWords(author);
 
   const generatedID = generateid();
   const listObj = generateListObj(generatedID, title, author, year, isComplete);
@@ -243,9 +247,7 @@ function searchBook() {
   const searchBox = document.getElementById("search-box");
   const searchInput = document.getElementById("search-input");
 
-  searchButton.addEventListener("click", function (e) {
-    e.preventDefault();
-
+  function doSearch() {
     const inputValue = searchInput.value.toLowerCase();
     const bookList = document.querySelectorAll(".item");
 
@@ -256,6 +258,18 @@ function searchBook() {
       } else {
         book.style.display = "none";
       }
+    }
+  }
+
+  searchButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    doSearch();
+  });
+
+  searchInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      doSearch();
     }
   });
 
@@ -272,6 +286,7 @@ function searchBook() {
   removeSearchInput.addEventListener("click", function () {
     searchInput.value = "";
     removeSearchInput.style.display = "none";
+    resetSearchResult()
   });
 
   searchInput.addEventListener("click", function () {
@@ -307,4 +322,12 @@ function resetSearchResult() {
   for (const book of bookList) {
     book.style.display = "block";
   }
+}
+
+function capitalizeWords(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
