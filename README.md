@@ -55,3 +55,8 @@ This project is built using **HTML, CSS, and JavaScript**, with `localStorage` a
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-username/bookshelf-app.git
+
+2. Open the project folder
+   ```bash
+   cd bookshelf-app
+3. Open **index.html** in your browser (no server needed).
