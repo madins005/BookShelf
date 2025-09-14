@@ -46,11 +46,13 @@ This project is built using **HTML, CSS, and JavaScript**, with `localStorage` a
 ---
 
 ## Preview
-![Bookshelf App Screenshot](./screenshot.png)  
-*(Replace `screenshot.png` with your actual screenshot file in the project folder)*  
+![Bookshelf App Screenshot](assets/preview-desktop.png)
+
+<p align="center">
+  <img src="assets/preview-mobile.png" alt="Landing Page Preview-mobile" width="400"/>
+</p>
 
 ---
-
 ## How to Run the Project
 1. Clone this repository:
    ```bash
